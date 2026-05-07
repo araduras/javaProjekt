@@ -1,0 +1,18 @@
+{
+    "java.jdt.ls.java.home": "/Users/norbert.kreisz/.vscode/extensions/redhat.java-1.54.0-darwin-arm64/jre/21.0.10-macosx-aarch64",
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-1.8",
+            "path": "/Applications/Katalon Studio Enterprise.app/Contents/Eclipse/jre",
+            "default": true
+        },
+        {
+            "name": "JavaSE-21",
+            "path": "/Users/norbert.kreisz/.vscode/extensions/redhat.java-1.54.0-darwin-arm64/jre/21.0.10-macosx-aarch64"
+        }
+    ],
+    "java.project.sourcePaths": [
+        "src"
+    ],
+    "java.project.referencedLibraries": []
+}
