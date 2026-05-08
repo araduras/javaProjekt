@@ -1,60 +1,80 @@
-    import java.util.ArrayList;
-    import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 
-    class Bob {
+class Bob {
     List<String> sentence = new ArrayList<>();
-    List<String> upperCaseSentence = new ArrayList<>();
-    List<Character> withoutWhiteSpace = new ArrayList<>();
-        String hey(String input) {
+    List<String> withoutWhiteSpace = new ArrayList<>();
+
+    String hey(String input) {
         listCreator(input);
-        
-            if(sentence.getLast()=="?" && sentence.equals(upperCaseSentence)){
-                return determiner("CAPITAL QUESTION");
-            }
-            else if (sentence.getLast().equals("?")){
-                return determiner("?");
-            }
-            else if (sentence.equals(upperCaseSentence)){
-                return determiner("CAPITAL");
-            }
-            else if (withoutWhiteSpace.isEmpty()){
-                   return determiner("whitespace");
-            }
-            else {
-                return determiner("Whatever.");
-            }
-            
-
+        if (fullCapsSentence(sentence)
+                && hasQuestionMarkAtEnd(sentence)) {
+            return "Calm down, I know what I'm doing!";
         }
 
-    void listCreator (String input){
+        else if (hasQuestionMarkAtEnd((withoutWhiteSpace))) {
+            return "Sure.";
+        }
 
-            for (int i = 0; i < input.length(); i++) {
-                sentence.add(input.substring(i, i+1));
+        else if (fullCapsSentence(sentence)) {
+            return "Whoa, chill out!";
+        }
+
+        else if (withoutWhiteSpace.isEmpty()) {
+            return "Fine. Be that way!";
+        } else {
+            return "Whatever.";
+        }
+    }
+
+    void listCreator(String input) {
+
+        for (int i = 0; i < input.length(); i++) {
+            sentence.add(input.substring(i, i + 1));
+        }
+
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+            if (!Character.isWhitespace(c)) {
+                withoutWhiteSpace.add(String.valueOf(c));
             }
-            for (int i = 0; i < input.length(); i++) {
-                upperCaseSentence.add(input.substring(i, i+1).toUpperCase());
-            }
-            for (int i = 0; i < input.length(); i++) {
-                char c = input.charAt(i);
-                if(!Character.isWhitespace(c)){
-                        withoutWhiteSpace.add(c);
-                }
-                
-                
-            }
-            
+        }
 
     }
 
-        String determiner(String s){
+    boolean isUpperCaseLetter(String s) {
+        return s.matches("[A-Z]") ? true : false;
+    }
 
-            switch (s){
-                case "?" : {return "Sure.";}
-                case "CAPITAL" : {return "Whoa, chill out!";}
-                case "CAPITAL QUESTION" : {return "Calm down, I know what I'm doing!";}
-                case "whitespace" : {return "Fine. Be that way!";}
-                default : return "Whatever.";
+    boolean isLowerCaseLetter(String s) {
+        return s.matches("[a-z]") ? true : false;
+    }
+
+    boolean fullCapsSentence(List<String> sentence) {
+        boolean sentenceHasCapitalLetter = false;
+        boolean sentenceHasLowerCaseLetter = false;
+        for (int i = 0; i < sentence.size(); i++) {
+            if (isUpperCaseLetter(sentence.get(i))) {
+                sentenceHasCapitalLetter = true;
+            }
+            if (isLowerCaseLetter(sentence.get(i))) {
+                sentenceHasLowerCaseLetter = true;
+            }
+
+        }
+        return sentenceHasCapitalLetter
+                && !sentenceHasLowerCaseLetter ? true : false;
+
+    }
+
+    boolean hasQuestionMarkAtEnd(List<String> sentence) {
+        boolean sentenceIsQuestion = false;
+        for (int i = 0; i < sentence.size(); i++) {
+            if (sentence.getLast().contains("?")) {
+                sentenceIsQuestion = true;
             }
         }
+        return sentenceIsQuestion ? true : false;
     }
+
+}
